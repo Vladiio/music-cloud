@@ -1,0 +1,16 @@
+{% extends 'sound/base.html' %}
+{% load staticfiles %}
+
+{% block title %}Main {% endblock %}
+
+{% block body %}
+    {% if album_list %}
+        <ul>
+            {% for album in album_list %}
+                <li>{{ album.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    No albums present
+    {% endif %}
+{% endblock %}
