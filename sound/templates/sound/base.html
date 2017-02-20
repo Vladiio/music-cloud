@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load sound_template_tags %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,9 +11,12 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
       <!-- Custom styles -->
       <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -20,10 +25,80 @@
     <![endif]-->
   </head>
   <body>
-  <nav class="navbar navbar-inverse">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="row">
 
-  </nav>
-    {% block body %}{% endblock %}
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed"
+                      data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="{% url 'index' %}" class="navbar-brand">
+                Music Cloud
+                <span class="glyphicon glyphicon-cloud" aria-label="Left Align"></span>
+              </a>
+            </div>
+
+            <div id="navbar-collapse" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="{% url 'index' %}">
+                    Home
+                    <span class="glyphicon glyphicon-home" aria-label="Left Align"></span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    Albums
+                    <span class="glyphicon glyphicon-play" aria-label="Left Align"></span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    Songs
+                    <span class="glyphicon glyphicon-music" aria-label="Left Align"></span>
+                    </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Sign in
+                    <span class="glyphicon glyphicon-log-in" aria-label="Left Align"></span>
+                    </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Create account
+                     <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>
+                    </a>
+                </li>
+              </ul>
+
+              <form class="navbar-form navbar-right">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search for songs">
+                <button type="submit" class="btn btn-default">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="row">
+            {% block body %}{% endblock %}
+
+        </div>
+      </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

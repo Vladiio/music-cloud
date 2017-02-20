@@ -1,0 +1,32 @@
+{% extends 'sound/base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ song.title }}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-offset-2 col-sm-8">
+        <div class="thumbnail">
+            <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
+            <div class="caption">
+                <h3>{{ song.title }}</h3>
+                <p>Artist: {{ song.artist }}</p>
+                {% for genre in song.genre.all %}
+                    <p>Genre: {{ genre.title }}</p>
+                {% endfor %}
+                {% if song.album %}
+                    <p>Album: {{ song.album }}</p>
+                {% else %}
+                    <p>Album: </p>
+                {% endif %}
+                <p>Published: {{ song.pub_date }}</p>
+                <div class="col-sm-offset-4">
+                    <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

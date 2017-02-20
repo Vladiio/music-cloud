@@ -1,0 +1,9 @@
+{% if genre_list %}
+    <ul class="nav nav-pills nav-stacked">
+        {% for genre in genre_list %}
+            <li><a href="#">{{ genre.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    No genres present
+{% endif %}
