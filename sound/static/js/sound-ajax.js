@@ -1,11 +1,22 @@
 $(document).ready( function(){
 
+    $('#like').click( function(event){
+
+        var $song_id = $(this).attr('data-songid');
+
+        $.get('/add_like/', {song_id: $song_id}, function(data){
+
+            $('#like-count').html(data);
+        });
+
+    });
+
     $('#add-comment-btn').click( function(event){
 
-        var text = $('#id_text').val()
+        var textarea = $('#id_text');
+        var text = textarea.val();
         var songid = $(this).attr('data-songid');
         var author = $(this).attr('data-author');
-        var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
         var context = {
             song_id: songid,
@@ -15,6 +26,7 @@ $(document).ready( function(){
         $.get('/add_comment/', context, function(data){
 
             $('#comment-list').html(data);
+            textarea.val('');
         });
     });
 });
