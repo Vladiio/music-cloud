@@ -1,0 +1,17 @@
+<h5>Comments:</h5>
+{% for comment in song.commentsong_set.all %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object" src="http://placehold.it/64x64" alt="...">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ comment.author }}</h4>
+                <p>{{ comment.text }}</p>
+                <h6 class="media-heading text-info">{{ comment.pub_date }}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor%}

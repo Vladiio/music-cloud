@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -52,4 +53,11 @@ class Song(models.Model):
         return self.title
 
 
+class CommentSong(models.Model):
+    song = models.ForeignKey(Song)
+    author = models.ForeignKey(User)
+    text = models.TextField()
+    pub_date = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.text[:10]

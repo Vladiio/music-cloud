@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from django.views import generic
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.models import User
 
-from .models import Song, Album
+from .models import Song, Album, CommentSong
 
 
 class IndexView(generic.ListView):
@@ -22,4 +22,22 @@ class SongDetailView(generic.DetailView):
     model = Song
 
 
+class CreateCommentSong(generic.View):
+    template_name = 'sound/snippets/comments_list.html'
+
+    def get(self, request):
+        song_id = request.GET.get('song_id')
+        author_name = request.GET.get('author_name')
+        text = request.GET.get('text_body')
+        text = text.strip()
+
+        song = Song.objects.get(id=int(song_id))
+        user = User.objects.get(username=author_name)
+        comment = CommentSong(song=song,
+                              author=user,
+                              text=text)
+        comment.save()
+
+
+        return render(request, self.template_name, {'song': song})
 

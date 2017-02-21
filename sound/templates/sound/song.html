@@ -4,29 +4,72 @@
 {% block title %}{{ song.title }}{% endblock %}
 
 {% block body %}
+
     <div class="col-sm-offset-2 col-sm-8">
-        <div class="thumbnail">
+        <div class="thumbnail song">
             <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
             <div class="caption">
+                <hr>
                 <h3>{{ song.title }}</h3>
+
+                <p>
+                    <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
+                </p>
                 <p>Artist: {{ song.artist }}</p>
                 {% for genre in song.genre.all %}
                     <p>Genre: {{ genre.title }}</p>
                 {% endfor %}
                 {% if song.album %}
                     <p>Album: {{ song.album }}</p>
-                {% else %}
-                    <p>Album: </p>
                 {% endif %}
                 <p>Published: {{ song.pub_date }}</p>
-                <div class="col-sm-offset-4">
-                    <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
-                </div>
-
+                <p>
+                    Likes: {{ song.likes }}
+                    <button type="button" class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                    </button>
+                </p>
             </div>
         </div>
+            <div class="col-sm-offset-1 col-sm-10 comments" id="comment-list">
+                    <h5>Comments:</h5>
+                    {% for comment in song.commentsong_set.all %}
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img class="media-object" src="http://placehold.it/64x64" alt="...">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{ comment.author }}</h4>
+                                        <p>{{ comment.text }}</p>
+                                        <h6 class="media-heading text-info">{{ comment.pub_date }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor%}
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 comments">
+                        <h6>Add Comment</h6>
+                        <form class="add-comment">
 
-
+                            <textarea class="form-control"
+                                      id="id_text"
+                                      name="text"
+                                      rows="5"
+                                      required=""
+                                      >
+                            </textarea>
+                            <button type="button" id ="add-comment-btn"
+                                    class="btn btn-default"
+                                    data-songid="{{ song.id }}"
+                                    data-author="{{ user.username }}">
+                                Add
+                            </button>
+                        </form>
+                </div>
     </div>
-
 {% endblock %}
