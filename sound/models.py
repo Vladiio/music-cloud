@@ -41,7 +41,7 @@ class Song(models.Model):
     album = models.ForeignKey(Album, blank=True, null=True)
     plays = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
-    pub_date = models.DateTimeField(auto_now=True)
+    pub_date = models.DateTimeField()
     slug = models.SlugField()
     picture = models.ImageField(upload_to='songs_picture', blank=True)
 

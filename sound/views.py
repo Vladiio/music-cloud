@@ -16,8 +16,8 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['song_list'] = Song.objects.order_by('-likes')[:5]
-        context['recent_song_list'] = Song.objects.order_by('-pub_date')[:5]
+        context['song_list'] = Song.objects.order_by('-likes')[:4]
+        context['recent_song_list'] = Song.objects.order_by('-pub_date')[:4]
         return context
 
 

@@ -4,35 +4,42 @@
 {% block title %}Main {% endblock %}
 
 {% block body %}
-            <div class="row">
-                    <h3>Top 5 albums</h3>
-                    <hr>
-                    {% if album_list %}
-                        {% for album in album_list %}
-                            <div class="col-sm-2">
-                                <a href="#" class="thumbnail">
-                                    <img src="{{ MEDIA_URL }}{{album.logo}}" alt="Album logo">
-                                </a>
-                            </div>
-                        {% endfor %}
-
-                        {% else %}
-                            No albums present
-                        {% endif %}
-            </div>
-
 
             <div class="row">
+                <div class="col-sm-10 main-list">
                     <h3>Top songs</h3>
-                    <hr>
                     {% if song_list %}
                         {% for song in song_list %}
-                            <div class="col-sm-2">
-                                <a href="{% url 'song-detail' song.slug %}" class="thumbnail song_list">
-                                    <img class="" src="{{ MEDIA_URL }}{{song.picture}}" alt="Song picture">
-                                </a>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="{% url 'song-detail' song.slug %}">
+                                        <img class="" src="{{ MEDIA_URL }}{{song.picture}}" alt="Song picture">
+                                    </a>
+                                    <div class="caption">
+                                        <h5 class="text-info">{{ song.title }}</h5>
+                                        <p>
+                                            Genre:
+                                            {% for genre in song.genre.all %}
+                                                {{ genre.title }}
+                                            {% endfor %}
+                                        </p>
+                                        <p>Artist: {{ song.artist }}
+                                        </p>
+                                             <button type="button"
+                                                     class="btn btn-danger btn-sm like"
+                                                     data-songid="{{ song.id }}">
+                                                 {{ song.likes }}
+                                                 <span class="glyphicon glyphicon-thumbs-up"></span>
+                                             </button>
+                                            <a href="{% url 'song-detail' song.slug %}"
+                                                    class="btn btn-primary btn-sm">
+                                                 <span class="glyphicon glyphicon-play"></span>
+                                            </a>
+                                    </div>
+                                </div>
                             </div>
                         {% endfor %}
+                    </div>
                 </div>
 
                     {% else %}
@@ -40,19 +47,44 @@
                     {% endif %}
 
             <div class="row">
-                <h3>Recent</h3>
-                <hr>
-                {% if recent_song_list %}
-                    {% for song in recent_song_list %}
-                        <div class="col-sm-2">
-                            <a href="{% url 'song-detail' song.slug %}" class="thumbnail">
-                                <img src="{{ MEDIA_URL }}{{song.picture}}" alt="Song picture">
-                            </a>
-                        </div>
-                    {% endfor %}
+                <div class="col-sm-10 main-list">
+                    <h3>Recently added</h3>
+                    {% if song_list %}
+                        {% for song in recent_song_list %}
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="{% url 'song-detail' song.slug %}">
+                                        <img class="" src="{{ MEDIA_URL }}{{song.picture}}" alt="Song picture">
+                                    </a>
+                                    <div class="caption">
+                                        <h5 class="text-info">{{ song.title }}</h5>
+                                        <p>
+                                            Genre:
+                                            {% for genre in song.genre.all %}
+                                                {{ genre.title }}
+                                            {% endfor %}
+                                        </p>
+                                        <p>Artist: {{ song.artist }}
+                                        </p>
+                                             <button type="button"
+                                                     class="btn btn-danger btn-sm like"
+                                                     data-songid="{{ song.id }}">
+                                                 {{ song.likes }}
+                                                 <span class="glyphicon glyphicon-thumbs-up"></span>
+                                             </button>
+                                            <a href="{% url 'song-detail' song.slug %}"
+                                                    class="btn btn-primary btn-sm">
+                                                 <span class="glyphicon glyphicon-play"></span>
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
                     {% else %}
-                        No albums present
+                        No songs present
                     {% endif %}
-            </div>
+
 {% endblock %}

@@ -1,12 +1,14 @@
 $(document).ready( function(){
 
-    $('#like').click( function(event){
+    $('.like').click( function(event){
 
         var $song_id = $(this).attr('data-songid');
+        var $me = $(this)
+        var $icon = ' <span class="glyphicon glyphicon-thumbs-up"></span>'
 
         $.get('/add_like/', {song_id: $song_id}, function(data){
 
-            $('#like-count').html(data);
+            $me.html(data + $icon);
         });
 
     });

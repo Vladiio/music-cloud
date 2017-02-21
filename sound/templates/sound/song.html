@@ -16,21 +16,21 @@
                     <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
                 </p>
                 <p>Artist: {{ song.artist }}</p>
-                {% for genre in song.genre.all %}
-                    <p>Genre: {{ genre.title }}</p>
-                {% endfor %}
+                <p>Genre:
+                    {% for genre in song.genre.all %}
+                        {{ genre.title }}
+                    {% endfor %}
+                </p>
                 {% if song.album %}
                     <p>Album: {{ song.album }}</p>
                 {% endif %}
                 <p>Published: {{ song.pub_date }}</p>
-                <p>
-                    Likes: <span id="like-count">{{ song.likes }}</span>
-                    <button id="like" type="button"
-                            class="btn btn-danger btn-sm"
+                    <button type="button"
+                            class="btn btn-danger btn-sm like"
                             data-songid="{{ song.id }}">
+                        {{ song.likes }}
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                     </button>
-                </p>
             </div>
         </div>
 
