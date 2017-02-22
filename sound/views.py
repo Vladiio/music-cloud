@@ -16,8 +16,8 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['song_list'] = Song.objects.order_by('-likes')[:4]
-        context['recent_song_list'] = Song.objects.order_by('-pub_date')[:4]
+        context['song_list'] = Song.objects.order_by('-likes')[:6]
+        context['recent_song_list'] = Song.objects.order_by('-pub_date')[:6]
         return context
 
 
@@ -59,3 +59,37 @@ class AddLike(generic.View):
 
         song.save()
         return HttpResponse(song.likes)
+
+
+class Suggestion(generic.View):
+    template_name = 'sound/snippets/item_list.html'
+
+    def get(self, request):
+        query = request.GET.get('query')
+        song_list = []
+        if query:
+            song_list = Song.objects.filter(title__istartswith=query)[:5]
+        return render(request, self.template_name, {'song_list': song_list})
+
+
+class SearchView(generic.View):
+    template_name = 'sound/search.html'
+
+    def post(self, request):
+        page_number = 1
+        all_songs = Song.objects.all()
+        query = self.request.POST.get('search')
+
+        if query:
+             all_songs = Song.objects.filter(title__icontains=query)
+
+        context = {
+            'song_list': all_songs,
+            'query': query,
+        }
+
+        return render(request, self.template_name, context)
+
+
+
+

@@ -1,0 +1,27 @@
+{% extends "sound/base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block body %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-4 col-sm-4 signin">
+          <form class="form-signin" method="post" action=".">
+            {% csrf_token %}
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <label for="id_username" class="sr-only">Username</label>
+          <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
+          <label for="id_password" class="sr-only">Password</label>
+          <input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+          <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}

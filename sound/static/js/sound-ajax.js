@@ -1,5 +1,17 @@
 $(document).ready( function(){
 
+
+    $('#search').keyup( function(event) {
+
+        $query = $(this).val();
+        $.get('/suggestion/', {query: $query}, function(data){
+
+            $('#suggestion').html(data);
+        });
+
+    });
+
+
     $('.like').click( function(event){
 
         var $song_id = $(this).attr('data-songid');
@@ -13,6 +25,7 @@ $(document).ready( function(){
 
     });
 
+
     $('#add-comment-btn').click( function(event){
 
         var textarea = $('#id_text');
@@ -25,10 +38,13 @@ $(document).ready( function(){
             author_name: author,
             text_body: text
         }
+
         $.get('/add_comment/', context, function(data){
 
             $('#comment-list').html(data);
             textarea.val('');
         });
+
     });
+
 });

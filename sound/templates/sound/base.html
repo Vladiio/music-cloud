@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% endblock %}</title>
+    <title>Music Cloud | {% block title %}{% endblock %}</title>
 
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
@@ -65,28 +65,33 @@
                     <span class="glyphicon glyphicon-music" aria-label="Left Align"></span>
                     </a>
                 </li>
-                <li>
-                  <a href="#">
-                    Sign in
-                    <span class="glyphicon glyphicon-log-in" aria-label="Left Align"></span>
-                    </a>
-                </li>
-                <li>
-                  <a href="#">
-                    Create account
-                     <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>
-                    </a>
-                </li>
-              </ul>
+                  {% if user.is_authenticated %}
+                    <li>
+                      <a href="{% url 'user_profile' %}">Profile
+                      <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>
+                      </a>
+                    </li>
 
-              <form class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search for songs">
-                <button type="submit" class="btn btn-default">
-                  <span class="glyphicon glyphicon-search"></span>
-                </button>
-                </div>
-              </form>
+                    <li>
+                      <a href="{% url 'auth_logout' %}">Log out
+                      <span class="glyphicon glyphicon-log-out" aria-label="Left Align"></span>
+                      </a>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{% url 'auth_login' %}">
+                        Sign in
+                        <span class="glyphicon glyphicon-log-in" aria-label="Left Align"></span>
+                        </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'registration_register' %}">
+                        Create account
+                         <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>
+                        </a>
+                    </li>
+                {% endif %}
+              </ul>
 
             </div>
           </div>
@@ -94,17 +99,17 @@
       </nav>
 
       <div class="container">
-        <div class="row main">
             {% block body %}{% endblock %}
 
-        </div>
       </div>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'js/tether.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/salvattore.min.js' %}"></script>
       <script src="{% static 'js/sound-ajax.js' %}"></script>
   </body>
 </html>

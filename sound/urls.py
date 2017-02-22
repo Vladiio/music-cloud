@@ -17,6 +17,12 @@ urlpatterns = [
         views.CreateCommentSong.as_view(),
         name='comment-create'),
 
+    url(r'^suggestion/$',
+        views.Suggestion.as_view(),
+        name='suggestion'),
 
+    url(r'^search/$',
+        views.SearchView.as_view(),
+        name='search'),
 
 ]

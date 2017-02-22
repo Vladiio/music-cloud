@@ -1,0 +1,11 @@
+{% if song_list %}
+    <ul class="list-group">
+        {% for song in song_list %}
+            <li class="list-group-item">
+                <a href="{% url 'song-detail' song.slug %}">{{ song.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+No results
+{% endif %}

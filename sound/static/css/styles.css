@@ -30,3 +30,25 @@ body {
     margin: 10px; 0;
 
 }
+
+.media-object {
+    width: 100px;
+}
+
+.media-list {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.media {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.btn-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

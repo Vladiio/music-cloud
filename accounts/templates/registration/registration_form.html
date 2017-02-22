@@ -1,0 +1,12 @@
+{% extends "sound/base.html" %}
+{% load i18n %}
+{% load bootstrap_toolkit %}
+
+{% block body %}
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form|as_bootstrap }}
+
+  <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+{% endblock %}

@@ -31,14 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'sound.apps.SoundConfig',
+    'bootstrap_toolkit',
+    'accounts.apps.AccountsConfig',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sound.apps.SoundConfig',
-    'bootstrap_toolkit',
+
+
 ]
 
 MIDDLEWARE = [
@@ -127,6 +132,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# accounts
+# Django registration redux settings
 
-LOGIN_URL = '/'
+LOGIN_URL = '/accounts/login/'
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
