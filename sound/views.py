@@ -7,6 +7,7 @@ from datetime import datetime
 from django.http import HttpResponse
 
 from .models import Song, Album, CommentSong
+from .forms import CommentForm
 
 
 class IndexView(generic.ListView):
@@ -77,7 +78,7 @@ class SearchView(generic.View):
 
     def post(self, request):
         page_number = 1
-        all_songs = Song.objects.all()
+        all_songs = Song.objects.all().order_by('-likes')[:10]
         query = self.request.POST.get('search')
 
         if query:

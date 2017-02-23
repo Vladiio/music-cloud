@@ -7,7 +7,7 @@ urlpatterns = [
         views.MyRegistrationView.as_view(),
         name='registration_register'),
 
-    url(r'^profile/$',
+    url(r'^profile/(?P<username>[\w]+)/$',
         views.UserProfileView.as_view(),
         name='user_profile'),
 

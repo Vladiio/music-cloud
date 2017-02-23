@@ -4,41 +4,43 @@
 {% block title %}{{ song.title }}{% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <div class="thumbnail song">
+                <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
+                <div class="caption">
+                    <hr>
+                    <h3>{{ song.title }}</h3>
 
-    <div class="col-sm-offset-2 col-sm-8">
-        <div class="thumbnail song">
-            <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
-            <div class="caption">
-                <hr>
-                <h3>{{ song.title }}</h3>
-
-                <p>
-                    <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
-                </p>
-                <p>Artist: {{ song.artist }}</p>
-                <p>Genre:
-                    {% for genre in song.genre.all %}
-                        {{ genre.title }}
-                    {% endfor %}
-                </p>
-                {% if song.album %}
-                    <p>Album: {{ song.album }}</p>
-                {% endif %}
-                <p>Published: {{ song.pub_date }}</p>
-                    <button type="button"
-                            class="btn btn-danger btn-sm like"
-                            data-songid="{{ song.id }}">
-                        {{ song.likes }}
-                        <span class="glyphicon glyphicon-thumbs-up"></span>
-                    </button>
+                    <p>
+                        <audio src="{{ MEDIA_URL }}{{ song.source }}" controls></audio>
+                    </p>
+                    <p>Artist: {{ song.artist }}</p>
+                    <p>Genre:
+                        {% for genre in song.genre.all %}
+                            {{ genre.title }}
+                        {% endfor %}
+                    </p>
+                    {% if song.album %}
+                        <p>Album: {{ song.album }}</p>
+                    {% endif %}
+                    <p>Published: {{ song.pub_date }}</p>
+                        <button type="button"
+                                class="btn btn-danger btn-sm like"
+                                data-songid="{{ song.id }}">
+                            {{ song.likes }}
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                        </button>
+                </div>
             </div>
         </div>
-
-            <div class="col-sm-offset-1 col-sm-10 comments" id="comment-list">
+    </div>
+    <div class="row">
+            <div class="col-sm-offset-2 col-sm-8" id="comment-list">
                 {% if song.commentsong_set.all %}
                     <h5>Comments:</h5>
                     {% for comment in song.commentsong_set.all %}
-                        <div class="panel panel-default">
+                        <div class="panel panel-default main">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="media-left">
@@ -55,11 +57,13 @@
                 {% endfor%}
                 {% endif %}
                 </div>
+    </div>
                 <div class="row">
-                    <div class="col-sm-offset-1 col-sm-10">
+                    <div class="col-sm-offset-3 col-sm-6">
                         <h6>Add Comment</h6>
                         {% if user.is_authenticated %}
                         <form class="add-comment">
+                            {% csrf_token %}
                             <textarea class="form-control" id="id_text" name="text" rows="5" required=""></textarea>
                             <button type="button" id ="add-comment-btn"
                                     class="btn btn-default"
@@ -74,6 +78,5 @@
                     </div>
                 </div>
             </div>
-
 
 {% endblock %}

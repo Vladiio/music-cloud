@@ -67,7 +67,7 @@
                 </li>
                   {% if user.is_authenticated %}
                     <li>
-                      <a href="{% url 'user_profile' %}">Profile
+                      <a href="{% url 'user_profile' user.username %}">Profile
                       <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>
                       </a>
                     </li>
@@ -99,7 +99,12 @@
       </nav>
 
       <div class="container">
-            {% block body %}{% endblock %}
+        <div class="row">
+          {% block search %}{% endblock %}
+        </div>
+        <div class="row">
+          {% block body %}{% endblock %}
+        </div>
 
       </div>
 
