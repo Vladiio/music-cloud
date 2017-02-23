@@ -30,11 +30,17 @@
                     {% endif %}
                     <p>Published: {{ song.pub_date }}</p>
                         <button type="button"
-                                class="btn btn-danger btn-sm like"
+                                class="btn btn-default btn-sm like"
                                 data-songid="{{ song.id }}">
                             {{ song.likes }}
                             <span class="glyphicon glyphicon-thumbs-up"></span>
                         </button>
+                        <a href="{% url 'update-song' song.slug %}"
+                           class="btn btn-default btn-sm">
+                            Update
+                            <span class="glyphicon glyphicon-pencil"></span>
+
+                        </a>
                 </div>
             </div>
         </div>
@@ -48,8 +54,12 @@
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="media-left">
-                                        <img class="media-object" src="http://placehold.it/64x64" alt="...">
-                                    </div>
+                                        {% if comment.author.user_profile.picture %}
+                                            <img class="media-object" src="{{ MEDIA_URL }}{{ comment.author.user_profile.picture }}" alt="...">
+                                        {% else %}
+                                            <img class="media-object" src="{% static 'images/default-user.png' %}" alt="...">
+                                        {% endif %}
+                                        </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">{{ comment.author }}</h4>
                                         <p>{{ comment.text }}</p>

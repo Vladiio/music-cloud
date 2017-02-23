@@ -1,16 +1,24 @@
 {% extends "sound/base.html" %}
+{% load staticfiles %}
 {% load i18n %}
+
+{% block title %}{{ selected_user.username }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">User profile {{ user.get_profile.web_site }}</h3>
+                    <h3 class="panel-title">User profile</h3>
+
                 </div>
                 <div class="panel-body">
                     <div class="col-sm-3">
-                        <img id="user-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}" alt="picture">
+                        {% if user_profile.picture %}
+                            <img class="user-picture" src="{{ MEDIA_URL }}{{ user_profile.picture }}" alt="picture">
+                        {% else %}
+                            <img class="user-picture" src="{% static 'images/default-user.png' %}" alt="picture">
+                        {% endif %}
                     </div>
                     <div class="col-sm-9">
                         <p>Username: {{ selected_user.username }}</p>

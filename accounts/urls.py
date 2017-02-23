@@ -11,6 +11,10 @@ urlpatterns = [
         views.UserProfileView.as_view(),
         name='user_profile'),
 
+    url(r'^update_profile/(?P<pk>[\d]+)/$',
+        views.UpdateUserProfile.as_view(),
+        name='update-user-profile'),
+
     url(r'^', include('registration.backends.simple.urls')),
 
 ]
