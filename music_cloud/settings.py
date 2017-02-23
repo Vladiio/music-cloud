@@ -138,5 +138,6 @@ LOGIN_URL = '/accounts/login/'
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
+LOGIN_REDIRECT_URL = 'index'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

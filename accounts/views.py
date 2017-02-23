@@ -12,6 +12,8 @@ class MyRegistrationView(RegistrationView):
         return reverse('user_profile', kwargs={'username': user.username})
 
 
+
+
 class UserProfileView(generic.View):
     template_name = 'registration/profile.html'
 

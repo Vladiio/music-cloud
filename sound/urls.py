@@ -25,4 +25,12 @@ urlpatterns = [
         views.SearchView.as_view(),
         name='search'),
 
+    url(r'^add_song/$',
+        views.CreateSong.as_view(),
+        name='create-song'),
+
+    url(r'songs/(?P<slug>[\w\-]+)/update/$',
+        views.UpdateSong.as_view(),
+        name='update-song'),
+
 ]

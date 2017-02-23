@@ -52,20 +52,15 @@
                   </a>
                 </li>
 
+                  {% if user.is_authenticated %}
+
                 <li>
-                  <a href="#">
-                    Albums
-                    <span class="glyphicon glyphicon-play" aria-label="Left Align"></span>
+                  <a href="{% url 'create-song' %}">
+                    Add song
+                    <span class="glyphicon glyphicon-plus" aria-label="Left Align"></span>
                   </a>
                 </li>
 
-                <li>
-                  <a href="#">
-                    Songs
-                    <span class="glyphicon glyphicon-music" aria-label="Left Align"></span>
-                    </a>
-                </li>
-                  {% if user.is_authenticated %}
                     <li>
                       <a href="{% url 'user_profile' user.username %}">Profile
                       <span class="glyphicon glyphicon-user" aria-label="Left Align"></span>

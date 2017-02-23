@@ -1,23 +1,23 @@
 from django.views import generic
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.views.generic.edit import CreateView, UpdateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.http import HttpResponse
 
-from .models import Song, Album, CommentSong
-from .forms import CommentForm
+from .models import Song, CommentSong
+from .forms import SongCreateForm
 
 
 class IndexView(generic.ListView):
     template_name = 'sound/index.html'
-    queryset = Album.objects.order_by('-likes')[:5]
-    context_object_name = 'album_list'
+    queryset = Song.objects.order_by('-likes')[:6]
+    context_object_name = 'song_list'
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['song_list'] = Song.objects.order_by('-likes')[:6]
         context['recent_song_list'] = Song.objects.order_by('-pub_date')[:6]
         return context
 
@@ -92,5 +92,14 @@ class SearchView(generic.View):
         return render(request, self.template_name, context)
 
 
+@method_decorator(login_required, name='dispatch')
+class CreateSong(CreateView):
+    form_class = SongCreateForm
+    template_name = 'sound/create_song.html'
 
 
+@method_decorator(login_required, name='dispatch')
+class UpdateSong(UpdateView):
+    model = Song
+    fields = ('title', 'artist', 'genre', 'picture')
+    template_name = 'sound/create_song.html'

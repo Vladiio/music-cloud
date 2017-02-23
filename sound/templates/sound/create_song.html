@@ -1,0 +1,39 @@
+{% extends 'sound/base.html' %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+
+{% block title %} Add Song {% endblock%}
+
+{% block body %}
+
+<div class="col-sm-offset-2 col-sm-8">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form method="post" action="."
+            class="form-horizontal col-xs-offset-3"
+            enctype="multipart/form-data">
+        {% csrf_token %}
+          {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+          {% endfor %}
+        {% for field in form.visible_fields %}
+        {% if field.errors %}
+            <div class="alert alert-warning" role="alert">{{ field.errors }}</div>
+          {% endif %}
+            <div class="form-group">
+              <div class="col-xs-4">
+                {{ field.label_tag }}
+              </div>
+              {{ field }}
+            </div>
+        {% endfor %}
+        <div class="col-xs-offset-6">
+          <input type="submit" class="btn btn-default" value="{% trans 'Submit' %}" />
+        </div>
+    </form>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

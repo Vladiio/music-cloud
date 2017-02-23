@@ -7,7 +7,11 @@
     <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
             <div class="thumbnail song">
-                <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
+                {% if song.picture %}
+                    <img src="{{ MEDIA_URL }}{{ song.picture }}" alt="song picture">
+                {% else %}
+                    <img src="{% static 'images/song_picture.png' %}" alt="song picture">
+                {% endif %}
                 <div class="caption">
                     <hr>
                     <h3>{{ song.title }}</h3>

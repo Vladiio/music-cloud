@@ -1,9 +1,12 @@
 from django import forms
-from .models import CommentSong
+from django.utils import timezone
+
+from .models import Song
 
 
-class CommentForm(forms.ModelForm):
+class SongCreateForm(forms.ModelForm):
+    pub_date = forms.DateTimeField(widget=forms.HiddenInput(),initial=timezone.now())
 
     class Meta:
-        model = CommentSong
-        fields = ('text', )
+        model = Song
+        exclude = ('likes', 'slug')
