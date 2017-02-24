@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tycbl^@#on!ng2bizzd64_*=h75tdvfsrm%vlr&=1a#=c31e5='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['grievous.pythonanywhere.com', ]
 
 
 # Application definition
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'sound.apps.SoundConfig',
     'bootstrap_toolkit',
-    'accounts.apps.AccountsConfig',
+    'accounts',
     'registration',
     'django.contrib.admin',
     'django.contrib.auth',
