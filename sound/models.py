@@ -3,6 +3,8 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+from unidecode import unidecode
+
 
 class Genre(models.Model):
     title = models.CharField(max_length=30, unique=True)
@@ -30,7 +32,7 @@ class Song(models.Model):
         return reverse('song-detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(unidecode(self.title))
         super(Song, self).save(*args, **kwargs)
 
     def __str__(self):
